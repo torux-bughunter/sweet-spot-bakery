@@ -1,19 +1,21 @@
 import type React from "react"
 import type { Metadata } from "next/dist/lib/metadata/types/metadata-interface"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Quicksand, Patrick_Hand } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { Toaster } from "@/components/ui/toaster"
 
-const inter = Inter({
+const quicksand = Quicksand({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700"],
 })
 
-const playfair = Playfair_Display({
+const patrickHand = Patrick_Hand({
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-heading",
 })
 
 export const metadata: Metadata = {
@@ -29,10 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${playfair.variable} font-sans`}>
-        <div className="flex min-h-screen flex-col">
+      <body className={`${quicksand.variable} ${patrickHand.variable} font-sans`}>
+        <div className="flex min-h-screen flex-col decoration-stars">
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 overflow-x-clip">{children}</main>
           <Footer />
         </div>
         <Toaster />
@@ -40,7 +42,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-
-import './globals.css'

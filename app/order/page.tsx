@@ -1,44 +1,67 @@
 "use client"
 
+import Image from "next/image"
+import Link from "next/link"
 import { useEffect } from "react"
+import { Button } from "@/components/ui/button"
 
 export default function OrderPage() {
-  // Add a resize listener to adjust iframe height if needed
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      // Handle potential messages from Google Form (if needed)
-      if (event.origin.includes('google.com')) {
-        console.log('Message from Google Form:', event.data);
+      if (event.origin.includes("google.com")) {
+        console.log("Message from Google Form:", event.data)
       }
-    };
+    }
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
+    window.addEventListener("message", handleMessage)
+    return () => window.removeEventListener("message", handleMessage)
+  }, [])
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-brown-800 mb-4">Place Your Order</h1>
-        <p className="text-lg text-brown-600 max-w-2xl mx-auto">
-          Fill out the form below to place your order. We'll contact you to confirm details and arrange payment.
-        </p>
-      </div>
+    <div className="flex flex-col">
+      {/* ─── HERO ─── */}
+      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/brownies.jpg"
+            alt="Order our treats"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal-dark/70 to-charcoal-dark/80" />
+        </div>
 
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-sm">
-        <iframe 
-          src="https://docs.google.com/forms/d/e/1FAIpQLScoPlbbY9iyNYURLuu9vO8e8LB4ETAdArPcf2TjgAtHM5hdFA/viewform?embedded=true" 
-          width="100%" 
-          height="1751" 
-          frameBorder="0" 
-          marginHeight="0" 
-          marginWidth="0"
-          title="Sweet Spot Bakery Order Form"
-          className="mx-auto"
-        >
-          Loading…
-        </iframe>
-      </div>
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <span className="inline-block bg-rose/80 backdrop-blur-sm text-white text-xs font-medium tracking-wider uppercase px-4 py-1.5 rounded-full mb-6">
+            Easy & Quick
+          </span>
+          <h1 className="font-heading text-5xl md:text-6xl text-white mb-4">
+            Place Your Order
+          </h1>
+          <p className="text-white/80 text-lg max-w-xl mx-auto">
+            Fill out the form below and we&apos;ll get back to you with confirmation and payment details.
+          </p>
+        </div>
+      </section>
+
+      {/* ─── FORM ─── */}
+      <section className="py-20 md:py-28 px-4">
+        <div className="container mx-auto max-w-3xl">
+          <div className="rounded-2xl border border-rose-light bg-card overflow-hidden shadow-sm">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLScoPlbbY9iyNYURLuu9vO8e8LB4ETAdArPcf2TjgAtHM5hdFA/viewform?embedded=true"
+              width="100%"
+              height="1751"
+              frameBorder="0"
+              title="Sweet Spot Bakery Order Form"
+              className="block"
+            >
+              Loading…
+            </iframe>
+          </div>
+        </div>
+      </section>
     </div>
   )
-} 
+}

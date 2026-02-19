@@ -1,94 +1,104 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Instagram, Twitter } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Instagram, Mail, MapPin } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-brown-800 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Logo and About */}
+    <footer className="bg-charcoal">
+      <div className="container mx-auto px-4 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* About */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center">
-              <div className="relative h-10 w-10 overflow-hidden rounded-full bg-brown-800">
+            <Link href="/" className="group flex items-center gap-2">
+              <div className="relative h-8 w-8 overflow-hidden rounded-full border border-rose/30 transition-transform duration-300 group-hover:scale-[1.03]">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/sweet_spot_logo.jpg-TpODahRJrYB0673FrEocoWSlZJNUFl.jpeg"
                   alt="The Sweet Spot Logo"
-                  width={50}
-                  height={50}
+                  width={32}
+                  height={32}
                   className="h-full w-full object-cover"
                 />
               </div>
-              <span className="ml-2 text-lg font-playfair font-bold text-white">The Sweet Spot</span>
+              <span className="font-heading text-base text-white">
+                The Sweet Spot
+              </span>
             </Link>
-            <p className="text-gray-300">
-              A home dessert business in Prosper, TX, committed to making high-quality, homemade desserts that put a
-              smile on your face with every bite.
+            <p className="text-sm text-white/50 leading-relaxed">
+              A home baking business in Prosper, TX — making homemade treats
+              that put a smile on your face with every bite.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-pink-300 transition-colors">
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
+          </div>
+
+          {/* Links */}
+          <div>
+            <h3 className="font-heading text-base text-white mb-4">
+              Company
+            </h3>
+            <ul className="space-y-2.5">
+              {[
+                { href: "/", label: "Home" },
+                { href: "/about", label: "About" },
+                { href: "/shop", label: "Menu" },
+                { href: "/cause", label: "Our Cause" },
+                { href: "/order", label: "Order" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/50 hover:text-rose-light transition-all duration-300 motion-safe:hover:translate-x-0.5"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="font-heading text-base text-white mb-4">
+              Contact
+            </h3>
+            <div className="space-y-3">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-sm text-white/50 hover:text-rose-light transition-all duration-300 motion-safe:hover:translate-x-0.5"
+              >
+                <Instagram className="h-4 w-4 flex-shrink-0" />
+                @thesweetspot
               </a>
-              <a href="#" className="text-white hover:text-pink-300 transition-colors">
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
+              <a
+                href="mailto:theofficial.sweetspot1@gmail.com"
+                className="flex items-center gap-2.5 text-sm text-white/50 hover:text-rose-light transition-all duration-300 motion-safe:hover:translate-x-0.5"
+              >
+                <Mail className="h-4 w-4 flex-shrink-0" />
+                theofficial.sweetspot1@gmail.com
               </a>
-              <a href="#" className="text-white hover:text-pink-300 transition-colors">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
+              <div className="flex items-center gap-2.5 text-sm text-white/50">
+                <MapPin className="h-4 w-4 flex-shrink-0" />
+                Prosper, TX
+              </div>
             </div>
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 font-playfair">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-300 hover:text-pink-300 transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop" className="text-gray-300 hover:text-pink-300 transition-colors">
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-gray-300 hover:text-pink-300 transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/order" className="text-gray-300 hover:text-pink-300 transition-colors">
-                  Order
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 font-playfair">Contact Us</h3>
-            <ul className="space-y-2">
-              <li className="text-gray-300">Prosper, TX</li>
-              <li className="text-gray-300">Email: theofficial.sweetspot1@gmail.com</li>
-              <li className="text-gray-300">Hours: Tue-Sat, 10am-6pm</li>
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-
         </div>
 
-        <div className="border-t border-brown-700 mt-12 pt-6 text-center text-gray-300">
-          <p>&copy; {new Date().getFullYear()} The Sweet Spot. All rights reserved.</p>
+        {/* Bottom bar */}
+        <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-white/40">
+            &copy; {new Date().getFullYear()} The Sweet Spot. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            <Link href="#" className="text-xs text-white/40 hover:text-white/60 transition-all duration-300 motion-safe:hover:-translate-y-0.5">
+              Privacy
+            </Link>
+            <Link href="#" className="text-xs text-white/40 hover:text-white/60 transition-all duration-300 motion-safe:hover:-translate-y-0.5">
+              Terms
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
   )
 }
-

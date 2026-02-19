@@ -1,55 +1,98 @@
-import { products, getProductsByCategory } from "@/lib/products"
+import Image from "next/image"
+import Link from "next/link"
+import { getProductsByCategory } from "@/lib/products"
 import ProductCard from "@/components/product-card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Button } from "@/components/ui/button"
 
 export default function ShopPage() {
-  const categories = [
-    { id: "all", name: "All Products" },
-    { id: "brownies", name: "Brownies" },
-    { id: "cookies", name: "Cookies" },
-  ]
+  const brownies = getProductsByCategory("brownies")
+  const cookies = getProductsByCategory("cookies")
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-brown-800 mb-4">Our Sweet Treats</h1>
-        <p className="text-lg text-brown-600 max-w-2xl mx-auto">
-          Browse our selection of homemade desserts, all made with love and the finest ingredients
-        </p>
-      </div>
+    <div className="flex flex-col">
+      {/* ─── HERO ─── */}
+      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/cookies1.png"
+            alt="Our goodies"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal-dark/70 to-charcoal-dark/80" />
+        </div>
 
-      <Tabs defaultValue="all" className="w-full">
-        <TabsList className="w-full flex justify-center mb-8 bg-muted">
-          {categories.map((category) => (
-            <TabsTrigger
-              key={category.id}
-              value={category.id}
-              className="data-[state=active]:bg-pink-500 data-[state=active]:text-white"
-            >
-              {category.name}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <span className="inline-block bg-rose/80 backdrop-blur-sm text-white text-xs font-medium tracking-wider uppercase px-4 py-1.5 rounded-full mb-6">
+            Fresh Daily
+          </span>
+          <h1 className="font-heading text-5xl md:text-6xl text-white mb-4">
+            Our Menu
+          </h1>
+          <p className="text-white/80 text-lg max-w-xl mx-auto">
+            Everything is made from scratch with love. Fresh, homemade, and meant to make
+            your day a little sweeter.
+          </p>
+        </div>
+      </section>
 
-        <TabsContent value="all" className="mt-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </TabsContent>
-
-        {categories.slice(1).map((category) => (
-          <TabsContent key={category.id} value={category.id} className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {getProductsByCategory(category.id).map((product) => (
+      {/* ─── BROWNIES ─── */}
+      {brownies.length > 0 && (
+        <section className="py-20 md:py-28 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <div className="text-center mb-14">
+              <span className="inline-block bg-blush-200 text-charcoal text-xs font-medium tracking-wider uppercase px-4 py-1.5 rounded-full mb-4">
+                Rich & Fudgy
+              </span>
+              <h2 className="font-heading text-4xl md:text-5xl text-charcoal">
+                Brownies
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-6">
+              {brownies.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
-          </TabsContent>
-        ))}
-      </Tabs>
+          </div>
+        </section>
+      )}
+
+      {/* ─── COOKIES ─── Dark contrast section */}
+      {cookies.length > 0 && (
+        <section className="py-20 md:py-28 px-4 bg-charcoal">
+          <div className="container mx-auto max-w-4xl">
+            <div className="text-center mb-14">
+              <span className="inline-block bg-rose/80 text-white text-xs font-medium tracking-wider uppercase px-4 py-1.5 rounded-full mb-4">
+                Soft & Chewy
+              </span>
+              <h2 className="font-heading text-4xl md:text-5xl text-white">
+                Cookies
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-6">
+              {cookies.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ─── CTA ─── */}
+      <section className="py-20 md:py-28 px-4">
+        <div className="container mx-auto max-w-2xl text-center">
+          <h2 className="font-heading text-4xl md:text-5xl text-charcoal mb-4">
+            Found Something You Like?
+          </h2>
+          <p className="text-charcoal-light text-lg mb-8">
+            Place your order and we&apos;ll bake it fresh just for you.
+          </p>
+          <Button asChild size="lg">
+            <Link href="/order">Order Now</Link>
+          </Button>
+        </div>
+      </section>
     </div>
   )
 }
-
