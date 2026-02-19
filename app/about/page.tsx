@@ -4,6 +4,27 @@ import { Button } from "@/components/ui/button"
 import { Heart, Users, Sparkles } from "lucide-react"
 
 export default function AboutPage() {
+  const founders = [
+    {
+      name: "Shivani Sankar",
+      role: "Head Baker & Social Media Manager",
+      bio: "Shivani brings creativity and precision to every recipe, ensuring consistent quality in every batch. With a keen eye for detail, she oversees our baking process while managing our social media presence.",
+      image: "/founders/shivani.png",
+    },
+    {
+      name: "Yuvi Disawal",
+      role: "Operations & Promotions Manager",
+      bio: "Keeping everything running smoothly behind the scenes, Yuvi handles order tracking and promotional activities. He ensures every order is processed efficiently and accurately.",
+      image: "/founders/yuvi.png",
+    },
+    {
+      name: "Samiksha Menaka",
+      role: "Packaging & Delivery Specialist",
+      bio: "Adding a personal touch to every order, Samiksha ensures each treat is beautifully presented. She coordinates delivery so your treats arrive perfectly and on time.",
+      image: "/founders/samiksha.jpeg",
+    },
+  ]
+
   return (
     <div className="flex flex-col">
       {/* ─── HERO ─── Full-width with background image */}
@@ -29,6 +50,59 @@ export default function AboutPage() {
           <p className="text-white/80 text-lg max-w-xl mx-auto">
             The people behind the treats — baking, creating, and giving back to the community.
           </p>
+        </div>
+      </section>
+
+      {/* ─── FOUNDERS ─── moved higher on page */}
+      <section className="py-20 md:py-24 px-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-14">
+            <span className="inline-block bg-blush-200 text-charcoal text-xs font-medium tracking-wider uppercase px-4 py-1.5 rounded-full mb-4">
+              Founders
+            </span>
+            <h2 className="font-heading text-4xl md:text-5xl text-charcoal mb-5">Our Founders</h2>
+            <p className="text-charcoal-light text-lg max-w-3xl mx-auto leading-relaxed">
+              The Sweet Spot is built by student founders who love baking, service, and community.
+              Each founder brings a different strength to keep every order thoughtful and consistent.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {founders.map((member) => (
+              <div
+                key={member.name}
+                className="rounded-2xl border border-rose-light bg-card p-6 md:p-8 transition-all hover:shadow-md"
+              >
+                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+                  <div className="relative h-28 w-28 md:h-32 md:w-32 rounded-2xl overflow-hidden border border-rose-light/80 shrink-0">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-2xl text-charcoal mb-1">
+                      {member.name}
+                    </h3>
+                    <p className="text-rose-dark text-sm font-medium mb-3">
+                      {member.role}
+                    </p>
+                    <p className="text-charcoal-light leading-relaxed">
+                      {member.bio}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-rose-light to-transparent" />
         </div>
       </section>
 
@@ -85,55 +159,6 @@ export default function AboutPage() {
                 No shortcuts, no preservatives — just real homemade flavor.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── TEAM ─── Light section */}
-      <section className="py-20 md:py-28 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-14">
-            <span className="inline-block bg-blush-200 text-charcoal text-xs font-medium tracking-wider uppercase px-4 py-1.5 rounded-full mb-4">
-              The Bakers
-            </span>
-            <h2 className="font-heading text-4xl md:text-5xl text-charcoal">
-              Who We Are
-            </h2>
-          </div>
-
-          <div className="space-y-6">
-            {[
-              {
-                name: "Shivani Sankar",
-                role: "Head Baker & Social Media Manager",
-                bio: "Shivani brings creativity and precision to every recipe, ensuring consistent quality in every batch. With a keen eye for detail, she oversees our baking process while managing our social media presence.",
-              },
-              {
-                name: "Yuvi Disawal",
-                role: "Operations & Promotions Manager",
-                bio: "Keeping everything running smoothly behind the scenes, Yuvi handles order tracking and promotional activities. He ensures every order is processed efficiently and accurately.",
-              },
-              {
-                name: "Samiksha Menaka",
-                role: "Packaging & Delivery Specialist",
-                bio: "Adding a personal touch to every order, Samiksha ensures each treat is beautifully presented. She coordinates delivery so your treats arrive perfectly and on time.",
-              },
-            ].map((member) => (
-              <div
-                key={member.name}
-                className="rounded-2xl border border-rose-light bg-card p-8 transition-all hover:shadow-md"
-              >
-                <h3 className="font-heading text-2xl text-charcoal mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-rose-dark text-sm font-medium mb-3">
-                  {member.role}
-                </p>
-                <p className="text-charcoal-light leading-relaxed">
-                  {member.bio}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

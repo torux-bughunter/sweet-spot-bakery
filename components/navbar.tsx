@@ -15,9 +15,10 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/shop", label: "Menu" },
+    { href: "/gallery", label: "Gallery" },
     { href: "/cause", label: "Our Cause" },
   ]
-  const darkHeroRoutes = ["/", "/about", "/shop", "/cause", "/order"]
+  const darkHeroRoutes = ["/", "/about", "/shop", "/gallery", "/cause", "/order"]
 
   const hasDarkHero = useMemo(
     () => darkHeroRoutes.some((route) => pathname === route),
